@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
     } else {
       //   return res.json(result); //오류발생하면 result에 담김
       return res.render("student/list", { stList: result }); // render : list.pug 를 html로 바꾸어보내라
-    } // stList 에 담아서 pug에게 rendering 시킨다
+    } // result값이 stList 에 담아서 pug에게 rendering 시킨다     // 여기서 list 를만든다
   });
   //   dbConn.end();
 });
@@ -33,13 +33,14 @@ router.get("/insert", (req, res) => {
   res.render("student/input"); // input.pug 를 열어라
 });
 
-router.post("/insert", (req, res) => {
+router.post("/insert", (req, res) => { // insert 주소로 가면 req, res
   //form.post 의 input 에 담긴 데이터를 받아서 배열로 생성
-  const params = [req.body.st_num, req.body.st_name, req.body.st_dept];
+  const params = [req.body.st_num, req.body.st_name, req.body.st_dept]; // input에서 입력받은것
   // query 문은 앞뒤에 빈칸을 넣어준다. 달라붙어버리기 때문.
   const sql = " INSERT INTO " + " tbl_student(st_num, st_name, st_dept) " + " VALUES(?,?,?) ";
 
-  dbConn.query(sql, params, (err, result) => {
+  // query : 요청. mysqldb에 정보를 요청
+  dbConn.query(sql, params, (err, result) => { // sql에 params 내용이 들어가서.. 보낸다
     // 여기서(이 query에서) 데이터가 추가되고나면
     if (err) {
       return res.render("INSERT SQL 오류");
@@ -59,7 +60,7 @@ router.post("/insert", (req, res) => {
  */
 // 주소인것처럼 보낸다
 router.get("/:st_num/detail", (req, res) => {
-  const st_num = req.params.st_num;
+  const st_num = req.params.st_num; //요청받은 주소에서 stnum을 가져온다..(?) 주소가져올때param이니까
   const sql = "SELECT * FROM tbl_student " + " WHERE st_num = ? "; // ? 반드시필요함
   //여기서 쿼리가 걸러주기때문
   dbConn.query(sql, [st_num], (err, result) => {
