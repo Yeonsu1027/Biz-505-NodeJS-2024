@@ -59,7 +59,7 @@ router.post("/insert", (req, res) => { // insert 주소로 가면 req, res
  / book/0003/detail    //위의 것보다 안전하다. 변수를 보여주지 않는다
  */
 // 주소인것처럼 보낸다
-router.get("/:st_num/detail", (req, res) => {
+router.get("/:st_num/detail", (req, res) => { //요청을 처리하고 응답을 반환 하는 콜백함수 get
   const st_num = req.params.st_num; //요청받은 주소에서 stnum을 가져온다..(?) 주소가져올때param이니까
   const sql = "SELECT * FROM tbl_student " + " WHERE st_num = ? "; // ? 반드시필요함
   //여기서 쿼리가 걸러주기때문
