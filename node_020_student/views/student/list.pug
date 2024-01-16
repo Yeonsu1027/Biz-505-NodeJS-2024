@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    link(rel="stylesheet", href="/css/list.css")
+    script(src="/js/list.js")
+    h1 학생정보
+
+    table.student.list
+        tr
+            th 학번
+            th 이름
+            th 학과
+        each item,index in stList // item에 들어있는 st data들을 각각에 td에
+            tr
+                td= item.st_num
+                td= item.st_name
+                td= item.st.dept
+    div.btn_box                
+        a(href="/student/insert") 학생정보 추가
