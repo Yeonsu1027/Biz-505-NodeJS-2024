@@ -23,6 +23,14 @@ th {
   border-top: 1px solid #bbb;
   background-color: #eee;
 }
+tr:nth-of-type(odd) {
+  background-color: #aee5ff;
+}
+tr:hover {
+  cursor: pointer;
+  background-color: #ddd; /* 호버가 칠한거 아래에 있어야함 */
+}
+
 th:nth-last-child(1), /* 가장 마지막에서 n번째 */
 td:nth-last-child(1) {
   border-right: none;

@@ -7,20 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 가져오는 여러방법들
 
-  // const st_num = document.querySelector("input[name='st_num']")  : 이렇게 쓸 수도있지만
-  //   const st_num = document.querySelector("#st_num"); // id를 붙이면 이렇게 간편하게 쓸 수 있다!!!
-  //   const st_name = document.querySelector("#st_name");
-  //   const st_dept = document.querySelector("#st_dept");
-  //   const btn_submit = document.querySelector("form.student button");
+  //   const st_num = document.querySelector("input[name='st_num']")  : 이렇게 쓸 수도있지만
+  //---------------------------------------------------- 1 뭐지 이거만되는데
+  const st_num = document.querySelector("#st_num"); // id를 붙이면 이렇게 간편하게 쓸 수 있다!!!
+  const st_name = document.querySelector("#st_name");
+  const st_dept = document.querySelector("#st_dept");
+  const btn_submit = document.querySelector("form.student button");
   const form = document.querySelector("form.student"); //부모태그를 선택하고.. 하나씩가져온다
+  //----------------------------------------------------- 2
   //   const st_num = form.querySelector("#st_num");
   //   const st_name = form.querySelector("#st_name");
   //   const st_dept = form.querySelector("#st_dept");
-  const st_submit = form.querySelector("button");
-  const inputs = form.querySelectorAll("input");
-  const st_num = inputs[ST_INDEX.ST_NUM]; //배열로부터 셀럭트를 하나씩 가져오는 방법
-  const st_name = inputs[ST_INDEX.ST_NAME];
-  const st_dept = inputs[ST_INDEX.ST_DEPT];
+  //---------------------------------------------------- 3
+  //   const st_submit = form.querySelector("button");
+  //   const inputs = form.querySelectorAll("input");
+  //   const st_num = inputs[ST_INDEX.ST_NUM]; //배열로부터 셀럭트를 하나씩 가져오는 방법
+  //   const st_name = inputs[ST_INDEX.ST_NAME];
+  //   const st_dept = inputs[ST_INDEX.ST_DEPT];
 
   // 여러개의 tag 묶음을 배열로 만들기
   const error_divs = document.querySelectorAll("div.student.error");
