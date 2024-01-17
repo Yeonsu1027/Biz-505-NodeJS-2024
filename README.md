@@ -19,3 +19,10 @@
   ## express framwork 프로젝트 생성
 
   -`express 프로젝트명`
+
+  ## 그 이후 mysql 연결하기
+
+  - `위에서 만든 express 프로젝트` 에서 터미널 열고
+  - `npm install`
+  - `npm install mysql2`
+  - `nodemon`
