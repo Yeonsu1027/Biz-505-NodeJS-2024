@@ -1,0 +1,54 @@
+.student {
+  width: 80%;
+  margin: 5px auto;
+}
+
+h1.student {
+  padding: 1.1rem;
+  color: green;
+}
+
+table.student {
+  border-collapse: collapse;
+}
+th,
+td {
+  border-right: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+  padding: 12px 16px;
+  text-align: center;
+}
+
+th {
+  border-top: 1px solid #bbb;
+  background-color: #eee;
+}
+tr:nth-of-type(odd) {
+  background-color: #aee5ff;
+}
+tr:hover {
+  cursor: pointer;
+  background-color: #ddd; /* 호버가 칠한거 아래에 있어야함 */
+}
+
+th:nth-last-child(1), /* 가장 마지막에서 n번째 */
+td:nth-last-child(1) {
+  border-right: none;
+}
+
+div.student {
+  text-align: right;
+  background-color: pink;
+}
+div.student a {
+  /* a tag를 인라인 블럭으로 만들어서 버튼처럼. 버튼안써도됨. */
+  display: inline-block;
+  padding: 12px 16px;
+  background-color: blue;
+  color: white;
+  border-radius: 10px;
+}
+
+div.student a:hover {
+  background-color: blueviolet;
+}

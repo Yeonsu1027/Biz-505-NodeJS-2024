@@ -1,0 +1,33 @@
+h1 {
+  width: 80%;
+  margin: 20px auto;
+}
+table {
+  width: 80%;
+  margin: 0px auto;
+  border-collapse: collapse; /* border 와 보더 사이 간격띄우기 기본값 s~~*/
+}
+th {
+  border: 1px solid red;
+  text-align: center;
+  padding: 8px;
+  cursor: pointer;
+}
+nav ul.main {
+  display: flex;
+  justify-content: right;
+}
+
+div.btn_box a {
+  display: inline-block;
+  margin-top: 10px;
+  width: 150px;
+
+  text-align: center;
+
+  text-decoration: none;
+  background-color: blue;
+  color: white;
+  border-radius: 10px;
+  padding: 15px;
+}
