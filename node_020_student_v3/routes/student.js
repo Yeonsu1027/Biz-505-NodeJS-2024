@@ -101,5 +101,52 @@ router.get("/:st_num/check", (req, res) => {
   });
 });
 
+router.get("/:st_num/delete", (req, res) => {
+  const st_num = req.params.st_num;
+  const sql = " DELETE FROM tbl_student WHERE st_num = ?";
+
+  dbConn.query(sql, [st_num], (err, result) => {
+    if (err) {
+      return res.json(err);
+    } else {
+      return res.redirect("/student");
+    }
+  });
+});
+// localhost:3000/student/학번/update
+// form tag 의 action 이 자동으로 URL 이 설정된다
+router.get("/:st_num/update", (req, res) => {
+  const st_num = req.params.st_num;
+  const sql = " SELECT * FROM tbl_student WHERE st_num = ? ";
+  dbConn.query(sql, [st_num], (err, result) => {
+    if (err) {
+      return res.json(err);
+    } else {
+      return res.render("student/input", { STD: result[0] }); //input 에보냄
+    }
+  });
+});
+
+// post로 업데이트하기
+router.post("/:st_num/update", (req, res) => {
+  const st_num = req.params.st_num; // """주소창"""(params)에 들어있는 학번 //이거만 params
+  const st_name = req.body.st_name; // 여기부터는 원래의 데이터에서 가져와 보여주어야하니까
+  const st_dept = req.body.st_dept;
+  const st_grade = req.body.st_grade;
+  const st_tel = req.body.st_tel;
+  const st_addr = req.body.st_addr;
+
+  const params = [st_name, st_dept, st_grade, st_tel, st_addr, st_num]; //key를 마지막에
+  const sql = " UPDATE tbl_student " + " SET st_name =?, " + " st_dept =?," + " st_grade =?," + " st_tel =?," + " st_addr =?" + " WHERE st_num =?";
+  // mysql에서 WHERE 에 학번을 적어서 저 학번을 기준으로 업데이트를 하라고 해서
+  // 여기서도 st_num 을 마지막에 적는 것이다. //delete,update 둘다.(mysql)
+  dbConn.query(sql, params, (err, result) => {
+    if (err) {
+      return res.json(err);
+    } else {
+      return res.redirect(`/student/${st_num}/detail`); // 다시요청해서 변경된 사항 보여주기
+    }
+  });
+});
 // router 객체를 다른곳에서 import 할 수 있도록 export 하기
 export default router;
