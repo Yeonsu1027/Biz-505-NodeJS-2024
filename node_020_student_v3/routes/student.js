@@ -71,10 +71,10 @@ router.get("/:st_num/detail", (req, res) => {
   // st_num은 변수이니 어떤값이 와도된다
   // 주소에 포함되어 전달된 값을 변수에 저장하기
   const st_num = req.params.st_num;
-  const params = [st_num];
+  const params = [st_num]; //하나여도 배열에 넣는다
   const sql = " SELECT * FROM tbl_student WHERE st_num = ? ";
   //   dbConn.query(sql, [st_num]);
-  dbConn.query(sql, params, (err, result) => {
+  dbConn.query(sql, params, (err, result) => { 
     if (err) {
       return res.json(err);
     } else {
@@ -127,7 +127,7 @@ router.get("/:st_num/update", (req, res) => {
   });
 });
 
-// post로 업데이트하기
+// post로 업데이트하기 //수정버튼을 눌렀을때
 router.post("/:st_num/update", (req, res) => {
   const st_num = req.params.st_num; // """주소창"""(params)에 들어있는 학번 //이거만 params
   const st_name = req.body.st_name; // 여기부터는 원래의 데이터에서 가져와 보여주어야하니까

@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     } else {
       const bRedYes = await st_num_valid(target);
-      if (bRedYes) {
+      if (bRedYes) { //red면
         target.select();
         return false;
       }
@@ -170,5 +170,5 @@ document.addEventListener("DOMContentLoaded", () => {
       error_divs[ST_INDEX.ST_DEPT].innerText = "";
     }
   });
-  st_num.focus();
+  st_num.focus(); //새로고침용 학번부터쓰라고
 });
