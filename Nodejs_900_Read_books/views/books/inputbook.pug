@@ -1,0 +1,26 @@
+extends ../layout 
+
+block content 
+    link(rel="stylesheet", href="/css/inputbook.css")
+    script(src="/js/inputbook.js")
+    form.books.inputbook(method="POST")
+        input(name ="isbn" placeholder="ISBN *필수입력")
+        div.book.error.isbn
+        input(name ="title" placeholder="도서명 *필수입력")
+        div.book.error.title
+        input(name ="publisher" placeholder="출판사 *필수입력")
+        div.book.error.publisher
+        input(name ="author" placeholder="저자 *필수입력")
+        div.book.error.author
+        input(placeholder="역자")
+        input(name ="price" placeholder="가격 *필수입력")
+        div.book.error.price
+        input(name ="sale" placeholder="할인가 10% :자동입력됩니다")
+        input(name ="pubdate" placeholder="발행일")
+        input(name ="link" placeholder="페이지")
+        input(placeholder="메모")
+        button 저장
+    div.bbutton        
+        a(href="/books/inputbook") 새로작성
+        a(href="/books/list") 리스트보기
+        

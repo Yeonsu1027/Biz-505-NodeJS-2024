@@ -1,0 +1,13 @@
+extends ../layout 
+
+block content 
+    link(rel="stylesheet", href="/css/inputuser.css")
+    script(src="/js/user.js")
+    form.sign(method="POST")
+        input(name ="M_ID" placeholder="회원ID")
+        input(name ="M_PASSWORD" placeholder="비밀번호" type="password")
+        input(name ="M_PR" placeholder="비밀번호확인" type="password")
+        div.passre
+        input(name ="M_EMAIL" placeholder="Email")
+        input(name ="M_NAME" placeholder="회원이름")
+        button#bbbbb 회원가입

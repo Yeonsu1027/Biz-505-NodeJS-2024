@@ -1,0 +1,25 @@
+table.books.list {
+  width: 90%;
+  margin: 10px;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+thead {
+  background-color: rgb(208, 208, 208);
+  border-top: 1px solid rgb(0, 0, 0);
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+td {
+  border-top: 1px solid rgb(0, 0, 0);
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+a.do {
+  text-align: center;
+  display: block;
+  padding: 10px;
+  color: black;
+  background-color: gray;
+  border-radius: 10px;
+}

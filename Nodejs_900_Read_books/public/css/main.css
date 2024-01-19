@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+header {
+  background-color: gray;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+ul.menu {
+  background-color: rgb(0, 110, 255);
+  list-style: none;
+
+  display: flex;
+}
+
+ul.menu li {
+  margin: 5px;
+  margin-left: 10px;
+  flex: 1;
+}
+
+ul.menu a:hover {
+  color: blueviolet;
+}
