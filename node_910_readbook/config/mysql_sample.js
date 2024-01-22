@@ -1,4 +1,8 @@
 import mysql from "mysql2/promise"; // promise 동기방식
+/*
+DB 접속정보를 다시 설정하고, 이 파일을 mysql.js로 이름변경 후
+프로젝트를 실행할 것
+*/
 const mysql_info = {
   host: "localhost",
   port: "3306",
