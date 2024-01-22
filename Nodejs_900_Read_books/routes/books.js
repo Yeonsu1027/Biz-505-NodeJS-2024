@@ -74,4 +74,21 @@ router.post("/sign", (req, res) => {
   });
 });
 
+router.get("/:isbn/detail", (req, res) => {
+  // st_num은 변수이니 어떤값이 와도된다
+  // 주소에 포함되어 전달된 값을 변수에 저장하기
+  const isbn = req.params.isbn;
+  const params = [isbn]; //하나여도 배열에 넣는다
+  const sql = " SELECT * FROM tbl_student WHERE st_num = ? ";
+  //   dbConn.query(sql, [st_num]);
+  dbConn.query(sql, params, (err, result) => {
+    if (err) {
+      return res.json(err);
+    } else {
+      //   return res.json(result);
+      return res.render("book/detail", { BK: result[0] }); //결과에서 0번째만 담아라
+    }
+  });
+});
+
 export default router;
