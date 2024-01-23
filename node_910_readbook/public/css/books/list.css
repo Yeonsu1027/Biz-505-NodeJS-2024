@@ -26,6 +26,14 @@ table.books {
       top: 0; /* 고정시킬위치 */
     }
   }
+  tbody {
+    tr {
+      cursor: pointer;
+    }
+    tr:hover {
+      background-color: #ddd;
+    }
+  }
 
   tr:nth-of-type(odd) {
     background-color: #c0ddff;
@@ -51,6 +59,7 @@ table.books {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; /* : 말줄임표 란뜻 화면 벗어나는 글자 ... */
+    /*detail용*/
   }
 
   th:nth-last-child(1),
