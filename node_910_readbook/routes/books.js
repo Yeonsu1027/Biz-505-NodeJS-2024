@@ -95,6 +95,19 @@ router.get("/:isbn/delete", (req, res) => {
     });
 });
 
+/*
+ * 도서정보 자세히 보기에서 수정하기를 클릭했을때
+ * 브라우저의 주소창에 /books/isbn/update 라고 입력했을때
+ * GET /books/0003/update 라고 요청을 했을때
+ *
+ * 이 router 가 요청을 받아서 처리한다
+ *
+ * 이 요청은 0003 도서의 정보를 input box 에 보여주고 수정할 수 있도록
+ * 화면을 보여달라
+ *
+ * 스토리텔링을 통해 코드를 익혀 보자
+ *
+ */
 router.get("/:isbn/update", (req, res) => {
   const isbn = req.params.isbn;
   const sql = " SELECT * FROM tbl_books WHERE isbn=? ";
@@ -102,6 +115,43 @@ router.get("/:isbn/update", (req, res) => {
     .query(sql, isbn)
     .then((rows) => {
       return res.render("books/input", { book: rows[0][0] });
+    })
+    .catch((err) => {
+      return res.render("db_error", err);
+    });
+});
+
+/**
+ * 수정하기 화면에서 input box 에 값을 입력하고
+ * 수정하기 버튼을 클릭했을때 post 방식으로 데이터가 전달된다
+ * POST /books/0003/update 로 요청을 할때
+ */
+router.post("/:isbn/update", (req, res) => {
+  const isbn = req.params.isbn;
+  const params = {
+    title: req.body.title,
+    author: req.body.author,
+    publisher: req.body.publisher,
+    price: Number(req.body.price),
+    discount: Number(req.body.discount),
+  };
+  const sql = " UPDATE tbl_books SET ? WHERE isbn = ? "; // mysql2도구 set
+
+  /**
+   * mysql2/promise 도구에서는 UPDATE SQL 문이 매우 간소해 진다
+   * UPDATE tbl_books SET title = ? , author = ? .. 과 같이 작성해야 하는데
+   * mysql2/promise 에서는 SET 키워드와 함께 json type 으로 만들어진 데이터를 통해
+   *  update SQL 문이 매우 간소해진다
+   *
+   * 다만, Update 를 실행할때 WHERE 절에 isbn = ? 가 필수항목으로 사용해야 하므로
+   * query() 함수에 전달하는 값은 배열로 2가지를 전달해야 한다 [params, isbn]
+   */
+  // 1번 ? 에서는 {json} 형식의 params
+  // 2번 ? 에는 isbn 을 보낸다!
+  dbConn
+    .query(sql, [params, isbn]) // ; 주의!!!!!!!
+    .then((_) => {
+      return res.redirect(`/books/${isbn}/detail`);
     })
     .catch((err) => {
       return res.render("db_error", err);

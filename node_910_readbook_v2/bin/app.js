@@ -16,16 +16,28 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 
+// MySQL Sequelize
+import DB from "../models/index.js";
+
 // import router modules
 import indexRouter from "../routes/index.js";
 import usersRouter from "../routes/users.js";
-import booksRouter from "../routes/books.js";
+import bookRouter from "../routes/books.js";
 
 // create express framework
 const app = express();
 
 // helmet security module
 app.use(helmet());
+
+// MySQL DB 연결
+// 주의!!! force 를 true 로 하면 기존의 Table 을 모두 DROP 한 후 재생성 한다
+DB.sequelize.sync({ force: false }).then((dbConn) => {
+  // true 하면 테이블이 생성된다!
+  // 맨처음 한 번은 true로 저장하고 그후 다시false로 바꾼다
+  // sync. 동기
+  console.log(dbConn.options.host, dbConn.config.database, "DB Connection OK");
+});
 
 // Disable the fingerprinting of this web technology.
 app.disable("x-powered-by");
@@ -44,8 +56,7 @@ app.use(express.static(path.join("public")));
 // router link enable, link connection
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-// /books/* 으로 요청이 들어오면 booksRouter 로 전달하라
-app.use("/books", booksRouter);
+app.use("/books", bookRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
