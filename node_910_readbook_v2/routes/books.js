@@ -21,9 +21,9 @@ router.get("/insert", async (req, res) => {
 });
 
 router.post("/insert", async (req, res) => {
-  const book_data = req.body;
+  const book_data = req.body; // sequelize 에서는 한번에 가져올 수있음
   try {
-    await BOOK.create(book_data);
+    await BOOK.create(book_data); 
     return res.redirect("/books");
   } catch (error) {
     return res.json(error);
@@ -49,7 +49,8 @@ router.get("/:isbn/detail", async (req, res) => {
     return res.json(error);
   }
 });
-router.post("/:isbn/updata", async (req, res) => {
+router.post("/:isbn/updata", async (req, res) => { //수정
+  // post는 인풋에서 적은걸 가져오는것...
   const book_data = req.body; // body.어쩌구 안써도됨.
   const isbn = req.params.isbn;
   try {
@@ -63,7 +64,7 @@ router.post("/:isbn/updata", async (req, res) => {
 router.get("/:isbn/delete", async (req, res) => {
   const isbn = req.params.isbn;
   try {
-    await BOOK.destroy({ where: { isbn } });
+    await BOOK.destroy({ where: { isbn } }); //특정 데이터삭제 {조건} 
     return res.redirect("/books");
   } catch (error) {
     return res.json(error);

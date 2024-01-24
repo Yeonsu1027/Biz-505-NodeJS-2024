@@ -13,5 +13,5 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 const db = { sequelize };
-db.models = initModel(sequelize);
+db.models = initModel(sequelize); // .models 테이블을 배열로 저장한다
 export default db;
