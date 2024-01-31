@@ -77,7 +77,7 @@ app.use("/users", usersRouter);
 app.use((req, res, next) => {
   //공통라우터
   res.locals = req.session; // 응답의 로케이션에 세션정보를 저장한다
-  next();
+  next(); // 다른라우터로 가게
 });
 
 // router link enable, link connection

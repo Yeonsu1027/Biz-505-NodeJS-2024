@@ -45,7 +45,7 @@ sequelize-auto -o "./models" -d edb -h localhost -u root -x '!Biz8080' -e mysql 
 - 서버에서 사용자 정보를 받아서 인증절차를 수행한다 : DB등과 연계
 - 인증이 완료과 되면 서버의 기억장치의 `Session 영역`에 사용자 정보를 저장
 - 저장된 사용자 정보를 식별할 수 있는 `ID(Session Id)` 발행(생성)한다
-- `request` 정보에 `Session ID`를 담아서 응답한다
+- `response` 정보에 `Session ID`를 담아서 응답한다
 - 이후에 client 에서 server 로 어떤 요청이든지 실행되면 Browser에 의해 `Session ID` 가 request 에 담겨서 서버로 전달된다.
 - server 에서 만약 사용자의 인증이 필요한 `URL` 에 대한 요청이 오면 request 에 함께 전달된 `Session ID`를 검사 한다.
 - 유효한 `Session ID` 임이 판정되면, Session 영역에서 데이터를 가져와서 사용할 수 있도록 해 준다.
