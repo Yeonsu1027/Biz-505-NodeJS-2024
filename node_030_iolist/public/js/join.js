@@ -11,8 +11,8 @@ const join_btn_click_event = async () => {
     userid.select();
     return false;
   } else {
-    //입력이됐으면
-    const response = await fetch(`/users/${userid.value}/check`);
+    // Async 방식으로 Server 에 userid check 요청
+    const response = await fetch(`/users/${userid.value}/check`); //응답객체
     const json = await response.json();
     if (json.MESSAGE === "FOUND") {
       alert("이미 등록된 사용자 ID 입니다");
