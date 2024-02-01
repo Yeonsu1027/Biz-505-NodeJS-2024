@@ -1,7 +1,23 @@
-import express from "express";
+import express from "express"; // 정적임폴트
 import DB from "../models/index.js";
 const USER = DB.models.tbl_members;
 const router = express.Router();
+
+/**
+ * NodeJS 에서 기본으로 제공하는 암호화 도구
+ * 현재 사용하는 상당부분의 암호화 알고리즘을 내부적으로 구현하여
+ * 쉽게 암호화 기능을 구현할 수 있도록 하는 도구
+ *
+ * 이 도구는 프로젝트가 실행되는 과정에서 import 오류가 발생할 가능성이 있다
+ * 이 모듈은 동적모듈로 실행할때 외부의 서버의 기능(함수)를 사용하여 작동된다
+ * 그래서 import 과정부터 exception 처리를 해주어야 한다
+ */
+let crypto; //오류 날 수있어서 이런형태 권장
+try {
+  crypto = await import("node:crypto");
+} catch (error) {
+  console.error(`Crypt 모듈을 사용할 수 없음 ${error}`);
+}
 
 /* GET users listing. */
 router.get("/", async (req, res, next) => {
@@ -44,8 +60,26 @@ router.post("/join", async (req, res) => {
   } else {
     req.body.m_role = "ADMIM";
   }
-  const result = await USER.create(req.body);
-  return res.json(result);
+
+  // 입력된 사용자 정보중 비밀번호를 단방향 암호화를 하여 Table 에 저장하기
+  const password = req.body.m_password;
+
+  // 암호화를 하기위한 준비작업
+  // 1. sha512 알고리즘으로 암호화를 하겠다
+  const hashAlgorithm = await crypto.createHash("sha512");
+  // 2. password 변수의 값을 암호화 하여라
+  const hashing = await hashAlgorithm.update(password); // 해싱이 암호화한 패스워드가된다
+  // 3. base64 방식으로 인코딩(간추리기)
+  const hashPassword = await hashing.digest("base64"); // digest간추리다
+  // 4. 암호화된 비밀번호를 원래 req.body.m_password 에 저장
+  req.body.m_password = hashPassword;
+
+  // return res.json({password:password, hashing:hashing})
+  // return res.json({ password, hashing, hashPassword }); // 기존이름과 생성이름같아서 한 번만
+
+  // 5. table 에 개인정보 저장하기
+  const result = await USER.create(req.body); //사용자정보 db에 저장
+  return res.redirect("/uesrs/login"); //회원가입했으니 로그인화면으로
 });
 
 /**
@@ -93,21 +127,30 @@ router.post("/login", async (req, res) => {
     // return res.json({ MESSAGE: "USER NOT FOUND" });
     // findByPk 는 >>>모든열을 반환<<<한다. result.칼럼 을써서 그 열의 다른 칼럼을 조회한다.
     // db = 입력한거 이면.
-  } else if (result.m_username === username && result.m_password !== password) {
-    return res.redirect(`/users/login?fail=${LOGIN_MESSAGE.PASS_WRONG}`); // 쿼리스트링
-    // return res.json({ MESSAGE: "PASSWORD WRONG" });
-  } else if (result.m_username === username && result.m_password === password) {
-    {
-      /**
-       * DB 에서 가져온 사용자정보(result)를
-       * Server 의 세션영역에 user 라는 이름으로 보관하라
-       * 그리고 Session ID 를 발행하라
-       */
-      req.session.user = result; // server에 세션영역에 유저 변수를 만들고 데이터 사용자정보를 저장하고 세션아이디 발행(?)
+  } else if (result.m_username === username) {
+    const hashAlgorithm = await crypto.createHash("sha512");
+    const hashing = hashAlgorithm.update(password); // (password)로그인할때 입력한 패스워드
+    const hashPassword = hashing.digest("base64");
+
+    if (result.m_password === hashPassword) {
+      req.session.user = result;
       return res.redirect("/");
-      // 결과도 비번도같으면
-      // return res.json({ MESSAGE: "LOGIN OK" });
+    } else {
+      return res.redirect(`/users/login?fail=${LOGIN_MESSAGE.PASS_WRONG}`);
     }
+
+    // return res.json({ MESSAGE: "PASSWORD WRONG" });
+  }
+  {
+    /**
+     * DB 에서 가져온 사용자정보(result)를
+     * Server 의 세션영역에 user 라는 이름으로 보관하라
+     * 그리고 Session ID 를 발행하라
+     */
+    req.session.user = result; // server에 세션영역에 유저 변수를 만들고 데이터 사용자정보를 저장하고 세션아이디 발행(?)
+    return res.redirect("/");
+    // 결과도 비번도같으면
+    // return res.json({ MESSAGE: "LOGIN OK" });
   }
 });
 
