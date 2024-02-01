@@ -2,12 +2,21 @@ import express from "express";
 
 import DB from "../models/index.js";
 const IOLIST = DB.models.tbl_iolist;
+const DEPTS = DB.models.tbl_depts;
+const PRODUCTS = DB.models.tbl_products;
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const rows = await IOLIST.findAll(); //테이블정보 가져와서 넣기
+    // product라는 모델을 포함시킨다
+    const rows = await IOLIST.findAll({
+      include: [
+        { model: PRODUCTS, as: "IO_상품" },
+        { model: DEPTS, as: "IO_거래처" }, // 배열로 2의 모델을 include
+      ],
+    });
+    // return res.json(rows);
     return res.render("iolist/list", { IOLIST: rows });
   } catch (error) {
     return res.json(error);
