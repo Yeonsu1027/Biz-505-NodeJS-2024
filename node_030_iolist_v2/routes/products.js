@@ -6,6 +6,7 @@ import { upLoad } from "../modules/file_upload.js"; //{}만쳐도 바로 from �
 const PRODUCTS = DB.models.tbl_products;
 const IOLIST = DB.models.tbl_iolist;
 const DEPTS = DB.models.tbl_depts;
+
 const router = express.Router();
 
 router.get("/", async (req, res) => {
