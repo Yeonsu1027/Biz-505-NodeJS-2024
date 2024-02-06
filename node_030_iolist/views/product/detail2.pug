@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+    script(src="/js/pdetail.js")
+    link(rel="stylesheet", href="/css/pdetail.css")
+    
+    div.title
+        h1.name #{PRODUCT.p_name}
+    div.detail
+        div.d1 
+            div
+                img(src="/images/day.png", alt="사진")
+            div 
+                div.d2 
+                    div.d3
+                        p 상품코드
+                        p= PRODUCT.p_code
+                        p 상품이름
+                        p= PRODUCT.p_name
+                    div.d3 
+                        p 품목
+                        p= PRODUCT.p_item
+                        p 규격
+                        p= PRODUCT.p_std
+                    div.d3
+                        p 매입단가
+                        p= PRODUCT.p_iprice
+                        p 매출단가
+                        p= PRODUCT.p_oprice
+    div.button_box
+        a.update(href=`/products/${PRODUCT.p_code}/update`) 수정
+        a.delete 삭제
+
+

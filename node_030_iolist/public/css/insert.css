@@ -1,0 +1,43 @@
+h1.p {
+  text-align: center;
+  color: skyblue;
+  padding: 10px;
+}
+
+form {
+  width: 80%;
+}
+div {
+  display: flex;
+  justify-content: center;
+  p {
+    flex: 1;
+    color: purple;
+    font-weight: bold;
+    font-size: larger;
+    text-align: right;
+    margin-right: 10px;
+    white-space: nowrap;
+  }
+  input {
+    padding: 10px;
+    margin: 5px;
+  }
+}
+
+div.button_box {
+  display: flex;
+  button {
+    flex: 1;
+    margin: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+  }
+  button.insert {
+    background-color: greenyellow;
+  }
+  button.cancle {
+    background-color: orange;
+  }
+}

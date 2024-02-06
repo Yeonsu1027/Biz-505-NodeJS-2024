@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+    link(rel="stylesheet", href="/css/insert.css")
+    h1.p 상품입력
+    form(action="POST") 
+        div
+            p 상품코드
+            input(type="text" name="p_code")
+            p 상품이름
+            input(type="text" name="p_name")
+        div
+            p 품목
+            input(type="text" name="p_item")
+            p 규격
+            input(type="text" name="p_std")
+        div
+            p 매입단가
+            input(type="text" name="p_iprice")
+            p 매출단가
+            input(type="text" name="p_oprice")
+        .image
+            img(src="/images/day.png", alt="사진")
+        div.button_box
+            button.insert 입력
+            button.cancle 취소
+        
