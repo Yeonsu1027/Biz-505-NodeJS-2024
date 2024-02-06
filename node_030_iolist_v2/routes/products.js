@@ -1,5 +1,8 @@
 import express from "express";
 import DB from "../models/index.js";
+
+import { upLoad } from "../modules/file_upload.js"; //{}만쳐도 바로 from 자동작성
+
 const PRODUCTS = DB.models.tbl_products;
 const IOLIST = DB.models.tbl_iolist;
 const DEPTS = DB.models.tbl_depts;
@@ -8,6 +11,25 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   const rows = await PRODUCTS.findAll({ limit: 10, order: [["p_code", "ASC"]] }); //await 중요!! 담기는거 기다려야함 //
   return res.render("product/list", { PRODUCTS: rows }); // limit: 몇개까지만 보이게
+});
+
+// router.get("/input", (req, res) => {
+//   return res.render("product/input");
+// });
+
+router.get("/insert", async (req, res) => {
+  return res.render("product/input");
+}); //상품추가페이지
+
+// 중간에 파일이 있으면 가로채서 파일업로드 작업수행
+// p_image 는 pug의 img input tag의 name
+// upLoad 미들웨어의 single()함수
+router.post("/insert", upLoad.single("p_image"), (req, res) => {
+  // single : 하나의 이미지만 받겠다
+
+  const file = req.file;
+
+  return res.json({ body: req.body, file });
 });
 
 router.get("/:pcode/detail", async (req, res) => {
@@ -20,39 +42,15 @@ router.get("/:pcode/detail", async (req, res) => {
   return res.render("product/detail2", { PRODUCT: row });
 });
 
-router.get("/insert", async (req, res) => {
-  return res.render("product/insert");
-}); //상품추가페이지
-
-// 수정만들어보기.. 일단 수정하는 곳으로 보내고
-router.get("/:pcode/update", async (req, res) => {
-  return res.render("product/insert");
-});
+// // 수정만들어보기.. 일단 수정하는 곳으로 보내고
+// router.get("/:pcode/update", async (req, res) => {
+//   return res.render("product/insert");
+// });
 
 router.post("/:pcode/update", async (req, res) => {
   const pcode = req.params.pcode;
   const row = await PRODUCTS.findByPk(pcode);
   return res.render("product/insert", { product: row });
 });
-//----------------------------------------------
-
-// 추가하기 만들어보기...
-// router.post("/insert", async (req, res) => {
-//   const p_code = req.body.p_code; // 이게맞나? 너무많은데
-//   const p_name = req.body.p_name;
-//   const p_item = req.body.p_item;
-//   const p_std = req.body.p_std;
-//   const p_iprice = req.body.p_iprice;
-//   const p_oprice = req.body.p_oprice;
-//   const rows = { p_code, p_name, p_item, p_std, p_iprice, p_oprice };
-//   const add = await PRODUCTS.push(rows);
-//   return res.replace("product/list", { add });
-// });
-
-//조회만들어보기
-// router.post("/:pcode/detail",async (req,res)=>{
-//   const pname = req.body.p_name  //입력받은거.. 검색하게..
-// return res.render("product/detail"{pname});  이름검색해서 어떻게 코드가져와..?
-// })
 
 export default router;

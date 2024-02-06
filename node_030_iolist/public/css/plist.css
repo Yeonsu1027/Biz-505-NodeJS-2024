@@ -1,0 +1,51 @@
+.products {
+  width: 80%;
+  margin: 0 auto;
+}
+
+table.products {
+  background-color: #eee;
+  border-collapse: separate;
+  border-spacing: 0.7px;
+  th,
+  td {
+    text-align: left;
+    padding: 10px 12px;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    /* top, right, bottom, left 순서로 색상 지정 오른쪽,아래를 제외하고 투명 */
+    border-color: white #ddd #ddd white;
+    &:nth-last-of-type(1) {
+      border-right: 1px solid none;
+    }
+  }
+  th {
+    border-top: 1px solid #ddd;
+  }
+  tr:hover {
+    background-color: #ddd !important;
+    cursor: pointer;
+  }
+  tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+  }
+}
+
+div.plist {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  button {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: blue;
+    color: white;
+  }
+  a {
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: greenyellow;
+    color: white;
+  }
+}

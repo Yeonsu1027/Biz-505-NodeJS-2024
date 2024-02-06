@@ -1,0 +1,17 @@
+.iolist {
+  width: 80%;
+  margin: 0 auto;
+}
+
+div.iolist.btn_box {
+  text-align: right;
+  a {
+    display: inline-block;
+    padding: 12px 0;
+  }
+  a:hover {
+    text-decoration: underline;
+    text-decoration-color: blue;
+    text-decoration-thickness: 2px;
+  }
+}

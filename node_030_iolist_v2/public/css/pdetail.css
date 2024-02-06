@@ -1,0 +1,59 @@
+div.detail {
+  display: flex;
+  justify-content: center;
+}
+div.title {
+  display: flex;
+  justify-content: center;
+}
+h1.name {
+  border: 2px solid skyblue;
+  padding: 3px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  width: 400px;
+  text-align: center;
+}
+
+div.d1 {
+  display: flex;
+}
+div.d3 {
+  display: flex;
+}
+
+p {
+  border: 2px solid pink;
+  padding: 10px;
+  width: 150px;
+  margin: 2px;
+}
+
+a {
+  text-align: center;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  width: 200px;
+  margin: 5px;
+  margin-top: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+a.update {
+  background-color: palegreen;
+}
+a.delete {
+  background-color: pink;
+}
+img {
+  margin-right: 10px;
+  width: 120px;
+  height: 120px;
+}
+
+div.button_box {
+  display: flex;
+  justify-content: center;
+}
