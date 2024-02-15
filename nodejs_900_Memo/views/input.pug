@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    link(rel="stylesheet", href="/css/input.css")
+    //- script(src ="/js/input.js")
+    form.memo(method="POST",enctype="multipart/form-data")
+        fieldset 
+            legend 메모입력하기
+            div 
+                input.hidden(type="int",name="m_seq", id="m_seq",value=`${MEMO ? MEMO.m_seq:""}`,placeholder="일련번호")
+                input.hidden(type="text",name="m_author",id="m_author",value=`${MEMO ? MEMO.m_author:""}`)
+                input.hidden(type="date",name="m_data",id="m_data",value=`${MEMO ? MEMO.m_data:""}`)
+                input.hidden(type="time",name="m_time",id="m_time",value=`${MEMO ? MEMO.m_time:""}`)
+            div.text
+                //-textarea(name="m_memo", cols="30", rows="10", placeholder="내용을 입력해주세요")
+                input.text(type="text", placeholder="내용을 입력해주세요",name="m_memo",id="m_memo",value=`${MEMO ? MEMO.m_memo:""}`)
+            div.img_box
+                img.img_add.hidden(src="/images/add_icon.svg",width="100px",height="100px",alt="추가아이콘")
+                if MEMO
+                    img.img_add(src=`/uploads/${MEMO.m_image}`,width="300px",alt="이미지")
+                else
+                    img.img_add(src="/images/noImage.svg", width="300px")
+                input(type="file",name="m_image",accept="image/*",id="m_image")
+                //- input.hidden#img_focus
+            div.btn_box
+                input(type="submit",value="저장")
+                //- button(type=`${MEMO?"submit" : "button"}`) 버튼저장
+                input(type="reset",value="새로작성")
+                a(href="/") 리스트로

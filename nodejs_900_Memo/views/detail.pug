@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    script(src ="/js/detail.js")
+    link(rel="stylesheet", href="/css/detail.css")
+    div.detail
+        div.image
+            if MEMO.m_image 
+                img(src=`/uploads/${MEMO.m_image}`,width="300px",alt="이미지")
+            else 
+                img(src="/images/noImage.svg", width="300px")
+        p= MEMO.m_seq
+        p= MEMO.m_data
+        p= MEMO.m_time
+        p= MEMO.m_memo
+        a(href="/") 리스트로
+        button.update(data-seq= `${MEMO.m_seq}`) 수정하기
+        button.delete(data-seq= `${MEMO.m_seq}`) 삭제하기

@@ -1,0 +1,16 @@
+CREATE DATABASE memoDB;
+
+USE memoDB;
+
+CREATE TABLE tbl_memo (
+m_seq BIGINT AUTO_INCREMENT PRIMARY KEY,
+m_author VARCHAR(25) NOT NULL,
+m_data VARCHAR(10) NOT NULL,
+m_time VARCHAR(10) NOT NULL,
+m_memo VARCHAR(40) NOT NULL,
+m_image VARCHAR(125)
+);
+
+SELECT * FROM tbl_memo;
+
+DROP TABLE tbl_memo;

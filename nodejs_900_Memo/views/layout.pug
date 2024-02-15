@@ -1,0 +1,25 @@
+doctype html
+html(lang="ko")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta( name='viewport', content='width=device-width, initial-scale=1')
+    title= title
+    link(rel='stylesheet', href='/css/main.css')
+    script(src="/js/list.js")
+  body
+    block content
+      h1 오늘은 내생의 가장 젊은날
+      a(href="/insert") 새로작성
+      div.listbox
+          each item in list
+            ul(data-seq=`${item.m_seq}`)
+              if item.m_image
+                img(src=`/uploads/${item.m_image}`,width="300px", alt=`사진`)
+              else
+                img(src="/images/noImage.svg", width="300px")
+              li= item.m_memo
+
+
+        
+

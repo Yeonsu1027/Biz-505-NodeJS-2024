@@ -1,0 +1,17 @@
+.hidden {
+  display: none;
+}
+.text {
+  width: 300px;
+  height: 300px;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+}
+legend {
+  color: skyblue;
+  font-weight: bold;
+  text-align: center;
+}

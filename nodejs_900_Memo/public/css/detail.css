@@ -1,0 +1,29 @@
+img {
+  width: 300px;
+  height: 300px;
+}
+p {
+  padding: 5px;
+  border: 3px solid pink;
+}
+button,
+a {
+  width: 100px;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  margin: 5px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+a {
+  display: block;
+  background-color: palevioletred;
+}
+button.update {
+  background-color: yellowgreen;
+}
+button.delete {
+  background-color: rgb(255, 83, 83);
+}
