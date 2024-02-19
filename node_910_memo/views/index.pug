@@ -3,17 +3,17 @@ extends layout
 block content
   link(rel="stylesheet", href="/css/index.css")
   script(src="/js/memo.js")
-  section.main
+  section.main 
     div.aside
       form.date
-        input.todate(type="text",value=`${toDate}`,name="m_date")
-        input.totime(type="text",value=`${toTime}`,name="m_time")
-        input.btn_new(type="button",value="새로작성")
+        input.todate(type="text",value= `${toDate}`,name="m_date")
+        input.totime(type="text",value= `${toTime}`,name="m_time")
+        input.btn_new(type="button", value="새로작성")
       ul.memo
         each MEMO in MEMOS
-          li.memo.list(data-seq=`${MEMO.m_seq}`)
+          li.memo.list(data-seq=`${MEMO.m_seq}`) 
             if MEMO.m_image
-              img.memo.item(src=`/images/${MEMO.m_image}`, alt="",width="20px")
+              img.memo.item(src=`/images/${MEMO.m_image}` , alt="",width="20px")
             else
               img.memo.item(src="/images/noImage.svg", alt="",width="20px")
             span.memo.item= MEMO.m_subject
@@ -21,7 +21,7 @@ block content
       form.input(method="POST",enctype="multipart/form-data")
         input.tosubject(type="text",placeholder="제목을 입력하세요",name="m_subject")
         input.tomemo(type="text",placeholder="메모를 입력하세요",name="m_memo")
-        input.toimage(type="file",name="m_image", accept="image/*")
-        img.memo_image(src="/images/noImage.svg", width="100px",height="100px")
+        input.toimage(type="file",name="m_image",accept="image/*")
+        img.memo.image(src="/images/noImage.svg", width="100px", height="100px")
         input.btn_save(type="button",value="추가")
-        input.btn_delete(type="hidden", value="삭제")
+        input.btn_delete(type="hidden",value="삭제")
