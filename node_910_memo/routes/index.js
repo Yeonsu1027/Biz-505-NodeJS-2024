@@ -27,15 +27,37 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", upLoad.single("m_image"), async (req, res) => {
   const imageFile = req.file;
-  try {
-    req.body.m_image = imageFile?.filename; // ? 로if문
-    req.body.m_author = "rito1205@naver.com"; /*인풋없어도 집어넣을 수 있다..*/
-    console.log(req.body);
+  const m_seq = req.query.seq;
+  // try {
+  req.body.m_image = imageFile?.filename; // ? 로if문
+  req.body.m_author = "rito1205@naver.com"; /*인풋없어도 집어넣을 수 있다..*/
+  if (m_seq) {
+    await MEMOS.update(req.body, { where: { m_seq } });
+  } else {
     await MEMOS.create(req.body);
-    return res.redirect("/");
-  } catch (error) {
-    return res.json(error);
   }
+  // console.log(req.body);
+  return res.redirect("/");
+  // } catch (error) {
+  //   return res.json(error);
+  // }
+});
+
+router.post("/update/:seq", upLoad.single("m_image"), async (req, res) => {
+  const seq = req.params.seq;
+  const imageFile = req.file;
+  req.body.m_image = imageFile?.filename;
+  req.body.m_author = "rito1205@naver.com";
+
+  await MEMOS.update(req.body, { where: { m_seq: seq } });
+
+  return res.redirect("/");
+});
+
+router.get("/:seq/get", async (req, res) => {
+  const seq = req.params.seq;
+  const row = await MEMOS.findByPk(seq);
+  return res.json(row);
 });
 
 router.get("/get_new_date", async (req, res) => {
