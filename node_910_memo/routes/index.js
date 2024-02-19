@@ -30,6 +30,7 @@ router.post("/", upLoad.single("m_image"), async (req, res) => {
   // try {
   req.body.m_image = imageFile?.filename;
   req.body.m_author = "callor@callor.com";
+  // 쿼리에 seq 값이 전달되어있으면
   if (m_seq) {
     await MEMOS.update(req.body, { where: { m_seq } });
   } else {
@@ -41,10 +42,8 @@ router.post("/", upLoad.single("m_image"), async (req, res) => {
   // }
 });
 
-router.post(
-  "/update/:seq",
-  upLoad.single("m_image"),
-  async (req, res) => {
+// 기존것
+router.post("/update/:seq",upLoad.single("m_image"), async (req, res) => {
     const seq = req.params.seq;
     const imageFile = req.file;
     req.body.m_image = imageFile?.filename;

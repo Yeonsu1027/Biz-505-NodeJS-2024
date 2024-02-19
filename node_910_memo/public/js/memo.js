@@ -73,7 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       // fetch 매서드는 JavaScript에서 서버로 네트워크 요청을 보내고 응답을 받을 수 있도록 해주는 매서드
       // fetch(url)
-      const res = await fetch(`/${seq}/get`);
+      const res = await fetch(`/${seq}/get`); // 서버에게 seq요청(?)
+      // fetch 안에는 url 이니까 router 에서 이 주소를 처리하는 코드중
+      // const seq = req.params.seq; 이걸 달라는듯(?)
       const json = await res.json();
       console.log(json);
 
@@ -90,8 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // form.input 에 action 을 새롭게 지정하여
       // 데이터 update 를 할 수 있도록 한다
       // input_form.action = `/update/${json.m_seq}`;
-      input_form.action = `/?seq=${json.m_seq}`;
-      btn_delete.type = "button";
+      input_form.action = `/?seq=${json.m_seq}`; 
+      // form 태그의 action 속성은 웹 페이지에서 폼 데이터를 전송할 대상 URL을 정의하는 데 사용된다
+      btn_delete.type = "button"; //원래 히든이었음
     }
   });
 
