@@ -80,10 +80,18 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(json);
 
       // 입력된 메모를 클릭했을때 시간,날짜,제목,내용이 입력칸에 뜬다
+
+      // 서버에서 받은 메모데이터를
+      // 각각의 input tag 에 value 값에 setting 하여
+      // 수정데이터가 보이도록 하기
       toDate.value = json.m_date;
       toTime.value = json.m_time;
       toSubject.value = json.m_subject;
       toMemo.value = json.m_memo;
+
+      // 이미지에 메모의 이미지를 세팅하기
+      memo_image.src = `/images/${json.m_image}`; // ajax 방식
+
       // btn_save 는 input tag 를 사용한 button 이므로
       // value 속성을 변경하면 화면에 보이는 text 가 변경된다
       btn_save.value = "수정";
@@ -92,9 +100,19 @@ document.addEventListener("DOMContentLoaded", () => {
       // form.input 에 action 을 새롭게 지정하여
       // 데이터 update 를 할 수 있도록 한다
       // input_form.action = `/update/${json.m_seq}`;
-      input_form.action = `/?seq=${json.m_seq}`; 
+      input_form.action = `/?seq=${json.m_seq}`;
       // form 태그의 action 속성은 웹 페이지에서 폼 데이터를 전송할 대상 URL을 정의하는 데 사용된다
+      // 삭제버튼이 나타나도록 하기
       btn_delete.type = "button"; //원래 히든이었음
+      btn_delete.dataset.seq = json.m_seq;
+    }
+  });
+
+  btn_delete.addEventListener("click", (event) => {
+    const target = event.target;
+    const seq = target.dataset.seq;
+    if (confirm("메모를 삭제할까요?")) {
+      document.location.replace(`/${seq}/delete`);
     }
   });
 
