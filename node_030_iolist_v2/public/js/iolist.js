@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 없을경우 버튼없으면 아래 디테일 이동도 실행x
     const seq = e.target.dataset.seq;
     if (confirm("삭제할까요?")) {
+      //실제 삭제가 아님
       document.location.replace(`/iolist/${seq}/delete`);
     }
   });
