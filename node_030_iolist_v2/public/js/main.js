@@ -30,4 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
       document.location.replace(url);
     }
   });
+
+  const iolist_count_get = async () => {
+    const main_item = document.querySelector("address.item");
+
+    const res = await fetch("/iolist/count");
+    const json = await res.json();
+    main_item.innerHTML = `매입매출 데이터는${json.count} 입니다`;
+  };
+  iolist_count_get(); // 모든 페이지가 열릴때마다 실행// 레이아웃에서 실행함
 });

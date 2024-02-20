@@ -34,4 +34,25 @@ router.get("/insert", (req, res) => {
   }
 });
 
+router.get("/:io_seq/detail", async (req, res) => {
+  const seq = req.params.io_seq;
+  const row = await IOLIST.findByPk(seq);
+  return res.render("iolist/detail", { IO_ITEM: row });
+});
+
+router.get("/:io_seq/delete", async (req, res) => {
+  // 실제로 삭제하지않고
+  const seq = req.params.io_seq;
+  const row = await IOLIST.findByPk(seq);
+  row.io_delete = 1; // 1값을세팅
+  await row.save(); // 그정보를 저장
+  // return res.render("iolist/detail", { IO_ITEM: row });
+  return res.redirect("/iolist");
+});
+
+router.get("/count", async (req, res) => {
+  const rows = await IOLIST.findAll();
+  return res.json({ count: rows.length });
+});
+
 export default router;
