@@ -17,3 +17,4 @@ DESC tbl_memos;
 SELECT * FROM tbl_memos;
 
 DROP TABLE tbl_memos;
+

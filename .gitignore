@@ -145,3 +145,4 @@ typings/
 
 # Security
 mysql.js
+naver_secret.js
