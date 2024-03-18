@@ -1,0 +1,27 @@
+doctype html
+html(lang="ko")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta( name='viewport', content='width=device-width, initial-scale=1')
+    title= title
+    link(rel='stylesheet', href='/css/main.css')
+    script(src="/js/main.js")
+  body
+    div.header
+      h1 청춘대학 소프트웨어 공학과
+      a.insert_std(href="/insert_std") 학생정보 추가
+    //- a.insert_score(href="/insert_score") 성적정보 입력
+    div.main
+      div.left.all
+        form.search
+          input.search(type="text", value=`${s_search}`, name="s_search", placeholder="학생검색")
+          input.search.sbtn(type="submit", value="조회")
+        div.std_table
+          each s in students
+            ul.std(data-stdnum=`${s.s_stdnum}`) 
+              li=s.s_stdnum
+              li=s.s_name
+              button.x X
+      div.right.all
+        block content

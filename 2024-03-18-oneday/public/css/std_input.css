@@ -1,0 +1,11 @@
+a.home {
+  padding: 10px;
+  background-color: skyblue;
+  color: black;
+  text-decoration: none;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}

@@ -1,0 +1,9 @@
+h3 학생정보
+link(rel="stylesheet", href="/css/std_input.css")
+form(method="POST")
+    input(type="text" name="s_name" placeholder="이름" value= row? row.s_name :"")
+    input(type="text" name="s_dept" placeholder="학과" value= row? row.s_dept :"")
+    input(type="number" name="s_grade" placeholder="학년" min="1" max="4" value= row? row.s_grade :"")
+    input(type="tel" name="s_tel" placeholder="전화번호" value= row? row.s_tel :"")
+    input(type="text" name="s_address" placeholder="주소" value= row? row.s_address :"")
+    button 저장

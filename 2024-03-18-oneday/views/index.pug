@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  link(rel="stylesheet", href="/css/detail.css")
+  script(src="/js/detail.js")
+  ul.std_infrom(data-stdnum=`${std.s_stdnum}`)
+    li.detail
+      p 학번 :
+      p= std.s_stdnum
+    li.detail
+      p 이름 :
+      p= std.s_name  
+    li.detail
+      p 학과 :
+      p= std.s_dept  
+    li.detail
+      p 학년 :
+      p= std.s_grade  
+    li.detail
+      p 전화번호 :
+      p= std.s_tel 
+    li.detail
+      p 주소 :
+      p= std.s_address
+    button.update_std.b 학생정보 수정하기    
+  //- tr 
+  //-   th 과목명
+  //-   th 점수
+  //- if scores.length > 0
+  div.subscore
+    each score in scores
+      ul.score(data-stdnum=`${std.s_stdnum}`)
+        li(data-subject=`${score.c_subject}`)
+          p.s= score.c_subject
+          p= score.c_score
+          button.sub_delete X
+  li.total
+    div.total 
+      p 총점
+      p= totalScore
+    div.avg
+      p 평균
+      p= avgScore
+  div.score_btn(data-stdnum=`${std.s_stdnum}`)
+    button.insert_score.b  성적정보 추가/수정
+    button.delete_score.b 성적정보 삭제
+  //- else 
+  //-   div.score_btn(data-stdnum=`${std.s_stdnum}`)
+  //-     button.insert_score 성적정보 추가

@@ -1,0 +1,36 @@
+link(rel="stylesheet", href="/css/score.css")
+script(src="/js/score.js")
+h1 성적정보 입력
+div.score_box
+  ul.std_s_infrom
+    li
+      p.n 학번
+      p=std.s_stdnum 
+    li
+      p.n 이름
+      p=std.s_name  
+    li
+      p.n 학과
+      p=std.s_dept  
+    li
+      p.n 학년
+      p=std.s_grade  
+    li
+      p.n 전화번호
+      p=std.s_tel  
+    li
+      p.n 주소
+      p=std.s_address
+  div.add_score
+    form(method="POST") 
+      select(name="c_subject")
+        //- option(value="" selected) 과목을 선택하세요
+        option(value="국어" name="c_subject") 국어
+        option(value="영어" name="c_subject") 영어
+        option(value="수학" name="c_subject") 수학
+        option(value="음악" name="c_subject") 음악
+        option(value="미술" name="c_subject") 미술
+        option(value="소프트웨어공학" name="c_subject") 소프트웨어공학
+        option(value="데이터베이스" name="c_subject") 데이터베이스 
+      input.score(type="number" name="c_score" placeholder="점수를 입력하세요"  min="1" max="100")
+      button.save 저장

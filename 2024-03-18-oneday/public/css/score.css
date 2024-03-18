@@ -1,0 +1,52 @@
+h1 {
+  text-align: center;
+}
+div.score_box {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+ul.std_s_infrom {
+  width: 100%;
+  border: 1px solid skyblue;
+  li {
+    display: flex;
+    p {
+      /* border: 1px solid red; */
+      flex: 9;
+    }
+    p.n {
+      flex: 3;
+    }
+  }
+}
+div.add_score {
+  width: 100%;
+  border: 1px solid skyblue;
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+select,
+input {
+  height: 40px;
+  margin: 5px;
+  width: 80%;
+  border-radius: 15px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+button.save {
+  width: 120px;
+  background-color: skyblue;
+  padding: 10px;
+  border-radius: 15px;
+}
