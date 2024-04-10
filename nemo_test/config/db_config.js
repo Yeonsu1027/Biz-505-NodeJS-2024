@@ -1,8 +1,8 @@
 export default {
   development: {
     username: 'root',
-    password: 'password',
-    database: 'sample',
+    password: '!Biz8080',
+    database: 'nemodb',
     host: '127.0.0.1',
     dialect: 'mysql',
     logging: true,

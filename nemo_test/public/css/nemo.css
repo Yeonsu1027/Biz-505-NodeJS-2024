@@ -1,0 +1,33 @@
+div.nemo_table {
+    /* border: 2px solid blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+div.row {
+    display: flex;
+}
+section.nemo {
+    width: 40px;
+    height: 40px;
+
+    border: 2px solid black;
+    margin: 1px;
+    &:hover {
+        background-color: #bbb;
+        opacity: 0.6;
+    }
+}
+button.check {
+    margin-top: 20px;
+    background-color: rgb(55, 139, 243);
+    color: white;
+    width: 200px;
+    height: 30px;
+    border-radius: 15px;
+    &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
+}
